@@ -1,4 +1,4 @@
-#coding=utf-8
+# -*- coding:utf-8 -*-
 #!/usr/bin/env python 
 
 import os
@@ -7,6 +7,7 @@ import sys
 
 doc = "d:\\apk\\04-3rdapk-fromYidao"
 apkInstall = "adb install "
+txt = "apk.txt"
 
 
 def findFile():
@@ -17,7 +18,7 @@ def findFile():
             pass
         for file in files:
             apkFile = os.path.join(root, file)
-            f = open("apk.txt", "a")
+            f = open(txt, "a")
             f.write(apkFile + '\n')
             f.close()
 
@@ -27,12 +28,18 @@ def installApk(file):
     for apk1 in p:
         print "install " + apk1
         os.system(apkInstall + apk1)
-
+def fileExist(file):
+    f = os.listdir(".")
+    if file in f:
+        os.remove(file)
+    else:
+        pass
 
 if __name__ == "__main__":
-    os.remove("apk.txt")
+    fileExist(txt)
+
     findFile()
-    installApk("apk.txt")
+ #   installApk(txt)
     print "finish"
 
     os.system("pause")
